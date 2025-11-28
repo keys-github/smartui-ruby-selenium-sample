@@ -25,17 +25,13 @@ driver = Selenium::WebDriver.for(:remote,
 begin
 
 options = {
-    ignoreDOM: {
-        xpath: ['//*[@id="__next"]/div/div[2]/main/section[4]']
+    :ignoreDOM => {
+        :xpath => ['//*[@id="__next"]/div/div[2]/main/section[4]']
     }
 }
-driver.navigate.to "https://ipinfo.io/"
-# Take a snapshot
-Lambdatest::Selenium::Driver.smartui_snapshot(driver, "Ignore", options)
-
 driver.navigate.to "https://www.lambdatest.com"
-# Take a snapshot
-Lambdatest::Selenium::Driver.smartui_snapshot(driver, "Home")
+# Take a snapshot with ignore options
+Lambdatest::Selenium::Driver.smartui_snapshot(driver, "screenshot", options)
 
 end
 print("Execution Successful\n")

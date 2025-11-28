@@ -24,13 +24,9 @@ driver = Selenium::WebDriver.for(:remote,
 :capabilities => options)
 begin
 
-driver.navigate.to "https://www.lambdatest.com/visual-regression-testing"
-# Take a snapshot
-Lambdatest::Selenium::Driver.smartui_snapshot(driver, "SmartUI-Home")
-
 driver.navigate.to "https://www.lambdatest.com"
 # Take a snapshot
-Lambdatest::Selenium::Driver.smartui_snapshot(driver, "Home")
+Lambdatest::Selenium::Driver.smartui_snapshot(driver, "screenshot")
 
 end
 print("Execution Successful\n")
