@@ -1,4 +1,4 @@
-# SmartUI SDK Sample for Selenium Ruby
+# SmartUI SDK Sample for Selenium Ruby — TestMu AI (Formerly LambdaTest)
 
 Welcome to the SmartUI SDK sample for Selenium Ruby. This repository demonstrates how to integrate SmartUI visual regression testing with Selenium Ruby.
 
@@ -22,7 +22,7 @@ smartui-ruby-selenium-sample/
 
 - Ruby 2.7 or higher
 - Node.js (for SmartUI CLI)
-- LambdaTest account credentials (for Cloud tests)
+- TestMu AI account credentials (for Cloud tests)
 - Chrome browser (for Local tests)
 
 ### Environment Setup
@@ -106,7 +106,7 @@ npx smartui exec ruby sdkCloud.rb
 
 ### Cloud Test (`sdk/sdkCloud.rb`)
 
-- Connects to LambdaTest Cloud using Selenium Remote WebDriver
+- Connects to TestMu AI Cloud using Selenium Remote WebDriver
 - Reads credentials from environment variables (`LT_USERNAME`, `LT_ACCESS_KEY`)
 - Takes screenshot with name: `screenshot`
 
@@ -121,9 +121,9 @@ npx smartui exec ruby sdkCloud.rb
 - Demonstrates how to use ignore options in SmartUI snapshots
 - Shows how to exclude specific DOM elements from visual comparison
 
-## Testing with LambdaTest Hooks
+## Testing with TestMu AI Hooks
 
-This repository also includes examples for using SmartUI with LambdaTest Hooks integration. Hooks-based integration allows you to use SmartUI directly within your existing LambdaTest Cloud automation tests without requiring the SmartUI CLI.
+This repository also includes examples for using SmartUI with TestMu AI Hooks integration. Hooks-based integration allows you to use SmartUI directly within your existing TestMu AI Cloud automation tests without requiring the SmartUI CLI.
 
 ### SDK vs Hooks: Which Approach to Use?
 
@@ -135,19 +135,19 @@ This repository also includes examples for using SmartUI with LambdaTest Hooks i
 - ✅ Requires `PROJECT_TOKEN` environment variable
 
 **Hooks Approach (Recommended for Cloud-Only Testing):**
-- ✅ Works only with LambdaTest Cloud Grid
-- ✅ No CLI required - direct integration with LambdaTest
-- ✅ Uses LambdaTest capabilities for configuration
-- ✅ Better for existing LambdaTest automation suites
+- ✅ Works only with TestMu AI Cloud Grid
+- ✅ No CLI required - direct integration with TestMu AI
+- ✅ Uses TestMu AI capabilities for configuration
+- ✅ Better for existing TestMu AI automation suites
 - ✅ Requires `LT_USERNAME` and `LT_ACCESS_KEY` environment variables
 
 ### Hooks Integration Setup
 
 **Location:** See the `hooks` folder for hooks integration examples.
 
-**Purpose:** Enhance visual regression capabilities in your LambdaTest web automation tests running on LambdaTest Cloud Grid.
+**Purpose:** Enhance visual regression capabilities in your TestMu AI web automation tests running on TestMu AI Cloud Grid.
 
-**Documentation:** [LambdaTest Selenium Visual Regression Documentation](https://www.lambdatest.com/support/docs/selenium-visual-regression-testing/).
+**Documentation:** [TestMu AI Selenium Visual Regression Documentation](https://www.testmuai.com/support/docs/selenium-visual-regression-testing/).
 
 ### Hooks Setup Steps
 
@@ -161,7 +161,7 @@ gem install selenium-webdriver
 
 #### 2. Configure Environment Variables
 
-Set your LambdaTest credentials:
+Set your TestMu AI credentials:
 
 ```bash
 export LT_USERNAME='your_username'
@@ -195,9 +195,9 @@ lt_options = {
 options.add_option('LT:Options', lt_options)
 ```
 
-#### 4. Connect to LambdaTest Grid
+#### 4. Connect to TestMu AI Grid
 
-Create a WebDriver instance connected to LambdaTest Cloud:
+Create a WebDriver instance connected to TestMu AI Cloud:
 
 ```ruby
 driver = Selenium::WebDriver.for(:remote,
@@ -281,7 +281,7 @@ The SmartUI hooks support various configuration options:
 
 ### View Hooks Results
 
-After running your hooks-based tests, visit the [LambdaTest Automation Dashboard](https://automation.lambdatest.com/) to view:
+After running your hooks-based tests, visit the [TestMu AI Automation Dashboard](https://automation.lambdatest.com/) to view:
 - Test execution status
 - Screenshots captured
 - Visual comparison results
@@ -392,7 +392,7 @@ jobs:
 
 ## Troubleshooting
 
-### Issue: `uninitialized constant Lambdatest::Selenium::Driver`
+### Issue: `uninitialized constant TestMu AI::Selenium::Driver`
 
 **Solution**: Install the gem:
 ```bash
@@ -417,7 +417,7 @@ export PROJECT_TOKEN='your_project_token'
 
 **Solution**:
 1. Verify `LT_USERNAME` and `LT_ACCESS_KEY` are set correctly
-2. Check credentials in [LambdaTest Profile Settings](https://accounts.lambdatest.com/profile)
+2. Check credentials in [TestMu AI Profile Settings](https://accounts.lambdatest.com/profile)
 
 ## Configuration Tips
 
@@ -444,9 +444,28 @@ After running the tests, visit your SmartUI project dashboard to view the captur
 
 ## Additional Resources
 
-- [SmartUI Selenium Ruby Onboarding Guide](https://www.lambdatest.com/support/docs/smartui-onboarding-selenium-ruby/)
-- [LambdaTest Selenium Ruby Documentation](https://www.lambdatest.com/support/docs/selenium-ruby/)
+- [SmartUI Selenium Ruby Onboarding Guide](https://www.testmuai.com/support/docs/smartui-onboarding-selenium-ruby/)
+- [TestMu AI Selenium Ruby Documentation](https://www.testmuai.com/support/docs/selenium-ruby/)
 - [Ruby Documentation](https://www.ruby-lang.org/en/documentation/)
 - [Selenium Ruby Documentation](https://www.selenium.dev/selenium/docs/api/rb/)
 - [SmartUI Dashboard](https://smartui.lambdatest.com/)
-- [LambdaTest Community](https://community.lambdatest.com/)
+- [TestMu AI Community](https://community.testmuai.com/)
+
+## 🚀 [LambdaTest is Now TestMu AI](https://www.testmuai.com/lambdatest-is-now-testmuai/)
+
+👋 Welcome to TestMu AI, the next evolution of LambdaTest. As of January 2026, LambdaTest has officially rebranded to TestMu AI. We have evolved from a cross-browser testing cloud into a unified, AI-native quality engineering platform designed for the modern DevOps era.
+
+Whether you have been part of the LambdaTest community for years or are just discovering TestMu AI, our mission remains the same: to help you ship faster with high-scale test execution, autonomous testing, and deep quality analytics.
+
+**🔄 Our Rebrand Journey**
+
+We chose the name TestMu AI to reflect our shift towards intelligent, autonomous testing. While our identity has changed, our core technology and commitment to the testing community stay the same.
+
+**✨ Specialties**
+
+- 🤖 AI-Native Test Execution (Formerly LambdaTest)
+- ⚡ Autonomous Test Automation
+- 🌐 Cross-Browser & Mobile Testing
+- 📊 Unified Quality Intelligence
+
+👉 Find [LambdaTest's New Home](https://www.testmuai.com/).
