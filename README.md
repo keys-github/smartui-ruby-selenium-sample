@@ -1,481 +1,115 @@
-# SmartUI SDK Sample for Selenium Ruby — TestMu AI (Formerly LambdaTest)
+# Run SmartUI Visual Tests with Ruby and Selenium on TestMu AI (Formerly LambdaTest)
 
-Welcome to the SmartUI SDK sample for Selenium Ruby. This repository demonstrates how to integrate SmartUI visual regression testing with Selenium Ruby.
+<p align="center">
+  <a href="https://www.testmuai.com/"><img src="https://img.shields.io/badge/MADE%20BY%20TestMu%20AI-000000.svg?style=for-the-badge&labelColor=000" alt="Made by TestMu AI"></a>
+  <a href="https://rubygems.org/gems/selenium-webdriver"><img src="https://img.shields.io/gem/v/selenium-webdriver.svg?style=for-the-badge&labelColor=000000" alt="selenium-webdriver version"></a>
+  <a href="https://community.testmuai.com/"><img src="https://img.shields.io/badge/Join%20the%20community-blueviolet.svg?style=for-the-badge&labelColor=000000" alt="Community"></a>
+</p>
 
-## Repository Structure
+## Getting Started
 
-```
-smartui-ruby-selenium-sample/
-├── sdk/
-│   ├── sdkCloud.rb          # Cloud test
-│   ├── sdkLocal.rb          # Local test
-│   ├── ignore_select.rb     # Example with ignore options
-│   ├── package.json         # SmartUI CLI dependency
-│   └── smartui-web.json     # SmartUI config (create with npx smartui config:create)
-└── hooks/                    # Hooks integration examples
-    └── smartui_hooks.rb
-```
+[TestMu AI](https://www.testmuai.com/) (Formerly LambdaTest) is the world's first full-stack AI Agentic Quality Engineering platform that empowers teams to test intelligently, smarter, and ship faster. Built for scale, it offers a full-stack testing cloud with 10K+ real devices and 3,000+ browsers. With AI-native test management, MCP servers, and agent-based automation, TestMu AI supports Selenium, Appium, Playwright, and all major frameworks. 
 
-## 1. Prerequisites and Environment Setup
+With TestMu AI (Formerly LambdaTest), you can run SmartUI visual regression tests with Ruby and Selenium on real browsers. This sample shows how to configure Ruby + Selenium + SmartUI to run on the TestMu AI cloud.
+
+- [Sign up on TestMu AI](https://www.testmuai.com/register/) (Formerly LambdaTest).
+- Follow the [TestMu AI Documentation](https://www.testmuai.com/support/docs/) for the full setup walkthrough.
 
 ### Prerequisites
 
-- Ruby 2.7 or higher
-- Node.js (for SmartUI CLI)
-- TestMu AI account credentials (for Cloud tests)
-- Chrome browser (for Local tests)
+- Ruby (latest stable) and Bundler. Node.js (for SmartUI CLI)
+- A TestMu AI (Formerly LambdaTest) account with your username and access key
 
-### Environment Setup
+### Setup
 
-**For Cloud:**
-```bash
-export LT_USERNAME='your_username'
-export LT_ACCESS_KEY='your_access_key'
-export PROJECT_TOKEN='your_project_token'
-```
-
-**For Local:**
-```bash
-export PROJECT_TOKEN='your_project_token'
-```
-
-## 2. Initial Setup and Dependencies
-
-### Clone the Repository
+Clone and install dependencies:
 
 ```bash
-git clone https://github.com/LambdaTest/smartui-ruby-selenium-sample
-cd smartui-ruby-selenium-sample/sdk
+git clone https://github.com/LambdaTest/smartui-ruby-selenium-sample && cd smartui-ruby-selenium-sample
+bundle install
 ```
 
-### Install Dependencies
+Set your credentials as environment variables.
 
-Install the required dependencies:
+**macOS / Linux:**
 
 ```bash
-npm install @lambdatest/smartui-cli
-gem install lambdatest-selenium-driver selenium-webdriver
+export LT_USERNAME="YOUR_USERNAME"
+export LT_ACCESS_KEY="YOUR_ACCESS_KEY"
+export LT_TUNNEL="YOUR_TUNNEL_NAME"
+export PROJECT_TOKEN="YOUR_PROJECT_TOKEN"
 ```
 
-**Dependencies included:**
-- `@lambdatest/smartui-cli` - SmartUI CLI (via npm)
-- `lambdatest-selenium-driver` - SmartUI SDK for Selenium Ruby (via gem)
-- `selenium-webdriver` - Selenium WebDriver for Ruby (via gem)
-
-**Note**: ChromeDriver is automatically managed by Selenium WebDriver.
-
-### Create SmartUI Configuration
+**Windows:**
 
 ```bash
-npx smartui config:create smartui-web.json
+set LT_USERNAME="YOUR_USERNAME"
+set LT_ACCESS_KEY="YOUR_ACCESS_KEY"
+set LT_TUNNEL="YOUR_TUNNEL_NAME"
+set PROJECT_TOKEN="YOUR_PROJECT_TOKEN"
 ```
 
-## 3. Steps to Integrate Screenshot Commands into Codebase
-
-The SmartUI screenshot function is already implemented in the repository.
-
-**Cloud Test** (`sdk/sdkCloud.rb`):
-```ruby
-driver.navigate.to "https://www.lambdatest.com"
-Lambdatest::Selenium::Driver.smartui_snapshot(driver, "screenshot")
-```
-
-**Local Test** (`sdk/sdkLocal.rb`):
-```ruby
-driver.navigate.to "https://www.lambdatest.com"
-Lambdatest::Selenium::Driver.smartui_snapshot(driver, "screenshot")
-```
-
-**Note**: The code is already configured and ready to use. You can modify the URL and screenshot name if needed.
-
-## 4. Execution and Commands
-
-### Local Execution
+### Run tests
 
 ```bash
-npx smartui exec ruby sdkLocal.rb
+bundle exec rake
 ```
 
-### Cloud Execution
+View results on your TestMu AI dashboard.
 
-```bash
-npx smartui exec ruby sdkCloud.rb
-```
+### Local testing with TestMu AI Tunnel
 
-## Test Files
+To test locally hosted apps, set up the TestMu AI tunnel. OS-specific guides:
 
-### Cloud Test (`sdk/sdkCloud.rb`)
+- [Local Testing on Windows](https://www.testmuai.com/support/docs/local-testing-for-windows/)
+- [Local Testing on macOS](https://www.testmuai.com/support/docs/local-testing-for-macos/)
+- [Local Testing on Linux](https://www.testmuai.com/support/docs/local-testing-for-linux/)
 
-- Connects to TestMu AI Cloud using Selenium Remote WebDriver
-- Reads credentials from environment variables (`LT_USERNAME`, `LT_ACCESS_KEY`)
-- Takes screenshot with name: `screenshot`
-
-### Local Test (`sdk/sdkLocal.rb`)
-
-- Runs Selenium locally using Chrome
-- Requires Chrome browser installed
-- Takes screenshot with name: `screenshot`
-
-### Ignore Example (`sdk/ignore_select.rb`)
-
-- Demonstrates how to use ignore options in SmartUI snapshots
-- Shows how to exclude specific DOM elements from visual comparison
-
-## Testing with TestMu AI Hooks
-
-This repository also includes examples for using SmartUI with TestMu AI Hooks integration. Hooks-based integration allows you to use SmartUI directly within your existing TestMu AI Cloud automation tests without requiring the SmartUI CLI.
-
-### SDK vs Hooks: Which Approach to Use?
-
-**SDK Approach (Recommended for Local Testing):**
-- ✅ Works with both local and cloud execution
-- ✅ Uses SmartUI CLI for configuration and execution
-- ✅ Supports multiple browsers and viewports via `smartui-web.json`
-- ✅ Better for CI/CD integration
-- ✅ Requires `PROJECT_TOKEN` environment variable
-
-**Hooks Approach (Recommended for Cloud-Only Testing):**
-- ✅ Works only with TestMu AI Cloud Grid
-- ✅ No CLI required - direct integration with TestMu AI
-- ✅ Uses TestMu AI capabilities for configuration
-- ✅ Better for existing TestMu AI automation suites
-- ✅ Requires `LT_USERNAME` and `LT_ACCESS_KEY` environment variables
-
-### Hooks Integration Setup
-
-**Location:** See the `hooks` folder for hooks integration examples.
-
-**Purpose:** Enhance visual regression capabilities in your TestMu AI web automation tests running on TestMu AI Cloud Grid.
-
-**Documentation:** [TestMu AI Selenium Visual Regression Documentation](https://www.testmuai.com/support/docs/selenium-visual-regression-testing/).
-
-### Hooks Setup Steps
-
-#### 1. Install Dependencies
-
-Install the required Ruby gems:
-
-```bash
-gem install selenium-webdriver
-```
-
-#### 2. Configure Environment Variables
-
-Set your TestMu AI credentials:
-
-```bash
-export LT_USERNAME='your_username'
-export LT_ACCESS_KEY='your_access_key'
-```
-
-#### 3. Configure Capabilities
-
-In your test file (e.g., `hooks/smartui_hooks.rb`), configure the capabilities with SmartUI options:
+Add the following to your capabilities:
 
 ```ruby
-require 'selenium-webdriver'
-
-USERNAME = ENV["LT_USERNAME"]
-ACCESS_KEY = ENV["LT_ACCESS_KEY"]
-
-options = Selenium::WebDriver::Options.chrome
-options.browser_version = "119.0"
-options.platform_name = "Windows 10"
-
-lt_options = {
-  username: USERNAME,
-  accessKey: ACCESS_KEY,
-  project: "Ruby Hooks Test",
-  sessionName: "Ruby Test",
-  build: "Ruby Job",
-  w3c: true,
-  plugin: "ruby-ruby",
-  'smartUI.project': "Ruby-Project"  # Your SmartUI project name
-}
-options.add_option('LT:Options', lt_options)
+:tunnel => true,
 ```
 
-#### 4. Connect to TestMu AI Grid
+## Contributions
 
-Create a WebDriver instance connected to TestMu AI Cloud:
+Contributions are welcome. Open an issue to discuss your idea before submitting a pull request. When reporting bugs, include your Ruby version, OS, and selenium-webdriver version.
 
-```ruby
-driver = Selenium::WebDriver.for(:remote,
-  url: "https://hub.lambdatest.com/wd/hub",
-  capabilities: options)
-```
+## TestMu AI (Formerly LambdaTest) Community
 
-#### 5. Add Screenshot Hooks
+Connect with testers and developers in the [TestMu AI Community](https://community.testmuai.com/). Ask questions, share what you are building, and discuss best practices in test automation and DevOps.
+  
+## TestMu AI (Formerly LambdaTest) Certifications
 
-Use `driver.execute_script()` to capture screenshots at any point in your test:
+Earn free [TestMu AI Certifications](https://www.testmuai.com/certifications/) for testers, developers, and QA engineers. Validate your skills in Selenium, Cypress, Playwright, Appium, Espresso and more. Industry-recognized, shareable on LinkedIn, and built by practitioners, not marketers.
 
-```ruby
-# Navigate to your page
-driver.navigate.to "https://www.lambdatest.com/visual-regression-testing"
+## Learning Resources by TestMu AI (Formerly LambdaTest)
 
-# Take a screenshot with basic configuration
-config = {
-  'screenshotName' => 'SmartUI-Home',
-  'fullPage' => true
-}
-driver.execute_script("smartui.takeScreenshot", config)
+Learn modern testing through tutorials, guides, videos, and weekly updates:
 
-# Take a viewport screenshot (visible area only)
-viewport_config = {
-  'screenshotName' => 'SmartUI-Home-Viewport',
-  'fullPage' => false
-}
-driver.execute_script("smartui.takeScreenshot", viewport_config)
-```
+* [TestMu AI Blog](https://www.testmuai.com/blog/)
+* [TestMu AI Learning Hub](https://www.testmuai.com/learning-hub/)
+* [TestMu AI on YouTube](https://www.youtube.com/@TestMuAI)
+* [TestMu AI Newsletter](https://www.testmuai.com/newsletter/)
+  
+## LambdaTest is Now TestMu AI
 
-#### 6. Run the Test
+On **January 12, 2026**, [LambdaTest evolved to TestMu AI](https://www.testmuai.com/lambdatest-is-now-testmuai/), the world's first fully autonomous **Agentic AI Quality Engineering Platform**.
 
-Execute your test script:
+Same team. Same infrastructure. Same customer accounts. All existing LambdaTest logins, scripts, capabilities, and integrations continue to work without change.
 
-```bash
-cd hooks
-ruby smartui_hooks.rb
-```
+ð Find the new home for [LambdaTest](https://www.testmuai.com).
 
-### Advanced Hooks Examples
+### How LambdaTest Evolved into TestMu AI
 
-#### Multiple Screenshots in One Test
+In 2017, we launched LambdaTest with a simple mission: make testing fast, reliable, and accessible. As LambdaTest grew, we expanded into Test Intelligence, Visual Regression Testing, Accessibility Testing, API Testing, and Performance Testing, covering the full depth of the testing lifecycle.
 
-```ruby
-driver.navigate.to "https://www.lambdatest.com"
+As software development entered the AI era, testing had to evolve, too. We rebuilt the architecture to be AI-native from the ground up, with autonomous agents that **plan, author, execute, analyze, and optimize tests** while keeping humans in the loop. The platform integrates with your repos, CI, IDEs, and terminals, continuously learning from every code change and development signal.
 
-# Screenshot 1: Homepage
-config1 = {
-  'screenshotName' => 'homepage',
-  'fullPage' => true
-}
-driver.execute_script("smartui.takeScreenshot", config1)
+That evolution earned a new name: **TestMu AI**, built for an AI-first future of quality engineering. TestMu is not a new name for us. It is the name of our annual community conference, which has brought together 100,000+ quality engineers to discuss how AI would reshape testing, long before that became an industry norm. 
 
-# Navigate and take another screenshot
-driver.navigate.to "https://www.lambdatest.com/pricing"
-config2 = {
-  'screenshotName' => 'pricing-page',
-  'fullPage' => true
-}
-driver.execute_script("smartui.takeScreenshot", config2)
-```
+What started as a high-performance cloud testing platform has transformed into an AI-native, multi-agent system powering a connected, end-to-end quality layer. That evolution defined a new identity: LambdaTest evolved into TestMu AI, built for an AI-first future of quality engineering.
 
-#### Screenshot with Custom Options
+## Support
 
-```ruby
-config = {
-  'screenshotName' => 'homepage-custom',
-  'fullPage' => true,
-  'ignore' => ['antialiasing', 'colors']
-}
-driver.execute_script("smartui.takeScreenshot", config)
-```
-
-### Hooks Configuration Options
-
-The SmartUI hooks support various configuration options:
-
-- **screenshotName**: Name for the screenshot (required)
-- **fullPage**: Set to `true` for full-page screenshot, `false` for viewport only
-- **ignore**: Array of visual artifacts to ignore (`"antialiasing"`, `"colors"`, etc.)
-
-### View Hooks Results
-
-After running your hooks-based tests, visit the [TestMu AI Automation Dashboard](https://automation.lambdatest.com/) to view:
-- Test execution status
-- Screenshots captured
-- Visual comparison results
-- Build and session details
-
-Navigate to your SmartUI project in the [SmartUI Dashboard](https://smartui.lambdatest.com/) to see detailed visual regression results.
-
-## Best Practices
-
-### Screenshot Naming
-
-- Use descriptive, unique names for each screenshot
-- Follow Ruby naming conventions (snake_case)
-- Include page/component name and state
-- Avoid special characters
-
-### When to Take Screenshots
-
-- After critical user interactions
-- Before and after form submissions
-- At different stages of multi-step processes
-- After page state changes
-
-### Ruby-Specific Tips
-
-- Use explicit waits before taking screenshots
-- Handle exceptions properly with begin/rescue/ensure
-- Use descriptive variable names
-- Follow Ruby style guidelines
-
-### Example: Screenshot with Waits
-
-```ruby
-require 'selenium-webdriver'
-
-wait = Selenium::WebDriver::Wait.new(timeout: 10)
-wait.until { driver.find_element(id: 'main-content') }
-Lambdatest::Selenium::Driver.smartui_snapshot(driver, "homepage")
-```
-
-## Common Use Cases
-
-### Multi-Step Flow Testing
-
-```ruby
-driver.navigate.to "https://example.com/checkout"
-Lambdatest::Selenium::Driver.smartui_snapshot(driver, "checkout-step-1")
-
-driver.find_element(id: "next-step").click
-wait.until { driver.find_element(id: "step-2").displayed? }
-Lambdatest::Selenium::Driver.smartui_snapshot(driver, "checkout-step-2")
-```
-
-### Error Handling
-
-```ruby
-begin
-  driver.navigate.to "https://www.lambdatest.com"
-  Lambdatest::Selenium::Driver.smartui_snapshot(driver, "homepage")
-rescue => e
-  puts "Screenshot failed: #{e.message}"
-  raise
-ensure
-  driver.quit
-end
-```
-
-## CI/CD Integration
-
-### GitHub Actions Example
-
-```yaml
-name: Ruby SmartUI Tests
-
-on: [push, pull_request]
-
-jobs:
-  visual-tests:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-      
-      - name: Setup Ruby
-        uses: ruby/setup-ruby@v1
-        with:
-          ruby-version: '3.0'
-      
-      - name: Setup Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: '18'
-      
-      - name: Install dependencies
-        run: |
-          cd sdk
-          gem install lambdatest-selenium-driver selenium-webdriver
-          npm install @lambdatest/smartui-cli
-      
-      - name: Run SmartUI tests
-        env:
-          PROJECT_TOKEN: ${{ secrets.SMARTUI_PROJECT_TOKEN }}
-          LT_USERNAME: ${{ secrets.LT_USERNAME }}
-          LT_ACCESS_KEY: ${{ secrets.LT_ACCESS_KEY }}
-        run: |
-          cd sdk
-          npx smartui exec ruby sdkCloud.rb
-```
-
-## Troubleshooting
-
-### Issue: `uninitialized constant TestMu AI::Selenium::Driver`
-
-**Solution**: Install the gem:
-```bash
-gem install lambdatest-selenium-driver
-```
-
-### Issue: `PROJECT_TOKEN is required`
-
-**Solution**: Set the environment variable:
-```bash
-export PROJECT_TOKEN='your_project_token'
-```
-
-### Issue: `ChromeDriver version mismatch` (Local)
-
-**Solution**: 
-1. Update ChromeDriver
-2. Use WebDriver Manager for automatic driver management
-3. Ensure Chrome browser is up to date
-
-### Issue: `Unauthorized` error (Cloud)
-
-**Solution**:
-1. Verify `LT_USERNAME` and `LT_ACCESS_KEY` are set correctly
-2. Check credentials in [TestMu AI Profile Settings](https://accounts.lambdatest.com/profile)
-
-## Configuration Tips
-
-### Optimizing `smartui-web.json`
-
-```json
-{
-  "web": {
-    "browsers": ["chrome", "firefox"],
-    "viewports": [
-      [1920, 1080],
-      [1366, 768],
-      [375, 667]
-    ],
-    "waitForPageRender": 30000,
-    "waitForTimeout": 2000
-  }
-}
-```
-
-## View Results
-
-After running the tests, visit your SmartUI project dashboard to view the captured screenshots and compare them with baseline builds.
-
-## Additional Resources
-
-- [SmartUI Selenium Ruby Onboarding Guide](https://www.testmuai.com/support/docs/smartui-onboarding-selenium-ruby/)
-- [TestMu AI Selenium Ruby Documentation](https://www.testmuai.com/support/docs/selenium-ruby/)
-- [Ruby Documentation](https://www.ruby-lang.org/en/documentation/)
-- [Selenium Ruby Documentation](https://www.selenium.dev/selenium/docs/api/rb/)
-- [SmartUI Dashboard](https://smartui.lambdatest.com/)
-- [TestMu AI Community](https://community.testmuai.com/)
-
-## 🚀 LambdaTest is Now TestMu AI
-
-👋 Welcome to TestMu AI, the next evolution of LambdaTest. As of January 2026, [LambdaTest is Now TestMu AI](https://www.testmuai.com/lambdatest-is-now-testmuai/) - we have evolved from a cross-browser testing cloud into a unified, AI-native quality engineering platform designed for the modern DevOps era.
-
-Whether you have been part of the LambdaTest community for years or are just discovering TestMu AI, our mission remains the same: to help you ship faster with high-scale test execution, autonomous testing, and deep quality analytics.
-
-### 🔄 Our Rebrand Journey
-
-In 2017, we introduced LambdaTest with a clear mission: to become the world's most trusted cloud testing platform. We built a scalable, high-performance test cloud that eliminated flakiness, improved developer feedback cycles, and accelerated release velocity for teams worldwide.
-
-As LambdaTest grew, we expanded the platform into Test Intelligence, Visual Regression Testing, Accessibility Testing, API Testing, and Performance Testing, covering the entire testing lifecycle. These capabilities enabled teams to test any stack, on any technology, at enterprise scale.
-
-Over time, we rebuilt the architecture to be AI-native from the ground up. What began as LambdaTest's high-performance testing cloud has now evolved into TestMu AI, an AI-native, multi-agent platform redefining modern quality engineering.
-
-We chose the name TestMu AI to reflect our shift towards intelligent, autonomous testing. While our identity has changed, our core technology and commitment to the testing community stay the same.
-
-👉 Find [LambdaTest's New Home](https://www.testmuai.com/).
-
-### 🔭 Explore TestMu AI
-
-The same infrastructure LambdaTest customers relied on, now delivered through autonomous AI agents.
-
-- [KaneAI](https://www.testmuai.com/kane-ai/)
-- [Agent-to-Agent Testing](https://www.testmuai.com/agent-to-agent-testing/)
-- [HyperExecute](https://www.testmuai.com/hyperexecute/)
-- [Real Device Cloud](https://www.testmuai.com/real-device-cloud/)
-- [Pricing](https://www.testmuai.com/pricing/)
-- [Documentation](https://www.testmuai.com/support/docs/)
+Got a question? Email [support@testmuai.com](mailto:support@testmuai.com) or chat with us 24x7 from our chat portal.
